@@ -5,5 +5,5 @@ logs/
 pdf_store/
 venv/
 .env
-chroma.logs
+chroma.log
 README.md
