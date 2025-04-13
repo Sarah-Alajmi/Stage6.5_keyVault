@@ -6,4 +6,5 @@ pdf_store/
 venv/
 .env
 chroma.log
+chroma
 README.md
