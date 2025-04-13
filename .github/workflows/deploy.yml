@@ -43,12 +43,23 @@ jobs:
          # --name CustomScript || true
 
     # Execute the Update Script on the VM
-    - name: Deploy to Azure VM
+   # - name: Deploy to Azure VM
+    #  run: |
+     #   az vm extension set \
+     #     --resource-group ${{ secrets.RESOURCE_GROUP }} \
+     #     --vm-name ${{ secrets.VMSS_NAME }} \
+     #     --name CustomScript \
+     #     --force-update \
+     #     --publisher Microsoft.Azure.Extensions \
+     #     --settings '{"commandToExecute": "/home/azureuser/keyvault/update_app.sh"}'
+
+    - name: Deploy to Azure VMSS
       run: |
-        az vm extension set \
-          --resource-group ${{ secrets.RESOURCE_GROUP }} \
-          --vm-name ${{ secrets.VM_NAME }} \
-          --name CustomScript \
-          --force-update \
-          --publisher Microsoft.Azure.Extensions \
-          --settings '{"commandToExecute": "/home/azureuser/keyvault/update_app.sh"}'
+        az vmss extension set \
+        --resource-group ${{ secrets.RESOURCE_GROUP }} \
+        --vmss-name ${{ secrets.VMSS_NAME }} \
+        --name CustomScript \
+        --publisher Microsoft.Azure.Extensions \
+        --version 2.0 \
+        --settings '{"commandToExecute": "/home/azureuser/keyvault/update_app.sh"}' \
+        --force-update
