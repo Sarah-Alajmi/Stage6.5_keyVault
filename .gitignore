@@ -1,0 +1,9 @@
+__pycache__/
+chat_logs/
+db/
+logs/
+pdf_store/
+venv/
+.env
+chroma.logs
+README.md
